@@ -1,0 +1,82 @@
+{
+  "days": [
+    {
+      "id": "1",
+      "day": 1
+    },
+    {
+      "id": "2",
+      "day": 2
+    },
+    {
+      "day": 4,
+      "id": "4"
+    },
+    {
+      "id": "1c58",
+      "day": 5
+    },
+    {
+      "id": "8e10",
+      "day": 6
+    },
+    {
+      "id": "39e1",
+      "day": 7
+    },
+    {
+      "day": 8,
+      "id": "PAvVHln1Y40"
+    },
+    {
+      "day": 9,
+      "id": "ay_0axzf4lM"
+    },
+    {
+      "day": 10,
+      "id": "5lEuKsvFjGk"
+    },
+    {
+      "day": 3,
+      "id": "tR1S2OayrvY"
+    }
+  ],
+  "words": [
+    {
+      "id": "5",
+      "day": 3,
+      "eng": "school",
+      "jpn": "学校",
+      "isDone": false
+    },
+    {
+      "id": "6",
+      "day": 3,
+      "eng": "pencil",
+      "jpn": "鉛筆",
+      "isDone": false
+    },
+    {
+      "id": "9108",
+      "day": 3,
+      "eng": "Wow",
+      "jpn": "わおー",
+      "isDone": false
+    },
+    {
+      "day": 1,
+      "eng": "Orange",
+      "jpn": "オレンジ",
+      "isDone": false,
+      "id": "9giT_u1FhJY"
+    },
+    {
+      "id": "a876",
+      "day": 2,
+      "eng": "aeiou",
+      "jpn": "あえいおう",
+      "isDone": false
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

@@ -60,6 +60,15 @@ a {
   padding: 10px;
 }
 
+.list_day button {
+  flex: 20% 0 0;
+  width: 30px;
+  box-sizing: border-box;
+  margin: 5px;
+  height: 46px;
+}
+
+
 .list_day a {
   display: block;
   padding: 20px 0;

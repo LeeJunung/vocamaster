@@ -1,38 +1,42 @@
 import React, { useRef, useState } from "react";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router-dom";
 import useFetch from "../hooks/useFetch";
 import { IDay } from "./DayList";
 
 export default function CreateWord() {
-  const days: IDay[] = useFetch("http://localhost:3001/days");
-  const history = useHistory();
+  const days: IDay[] = useFetch("/api/days");
+  // react-router-dom v6: useHistoryからuseNavigateに変更
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
+  // フォーム送信時に単語を新規登録する
   function onSubmit(e: React.FormEvent) {
     e.preventDefault();
 
-    if (!isLoading && dayRef.current && engRef.current && korRef.current) {
+    if (!isLoading && dayRef.current && engRef.current && jpnRef.current) {
       setIsLoading(true);
 
       const day = dayRef.current.value;
       const eng = engRef.current.value;
-      const kor = korRef.current.value;
+      const jpn = jpnRef.current.value;
 
-      fetch(`http://localhost:3001/words/`, {
+      // nginxプロキシ経由でjson-serverにPOSTリクエスト
+      fetch(`/api/words/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          day,
+          day: Number(day), // dayは数値として保存
           eng,
-          kor,
+          jpn,
           isDone: false,
         }),
       }).then(res => {
         if (res.ok) {
-          alert("생성이 완료 되었습니다");
-          history.push(`/day/${day}`);
+          alert("作成が完了しました");
+          // v6: history.pushからnavigateに変更
+          navigate(`/day/${day}`);
           setIsLoading(false);
         }
       });
@@ -40,7 +44,7 @@ export default function CreateWord() {
   }
 
   const engRef = useRef<HTMLInputElement>(null);
-  const korRef = useRef<HTMLInputElement>(null);
+  const jpnRef = useRef<HTMLInputElement>(null);
   const dayRef = useRef<HTMLSelectElement>(null);
 
   return (
@@ -50,8 +54,9 @@ export default function CreateWord() {
         <input type="text" placeholder="computer" ref={engRef} />
       </div>
       <div className="input_area">
-        <label>Kor</label>
-        <input type="text" placeholder="컴퓨터" ref={korRef} />
+        {/* kor → jpnに変更 */}
+        <label>Jpn</label>
+        <input type="text" placeholder="コンピューター" ref={jpnRef} />
       </div>
       <div className="input_area">
         <label>Day</label>
@@ -68,7 +73,7 @@ export default function CreateWord() {
           opacity: isLoading ? 0.3 : 1,
         }}
       >
-        {isLoading ? "Saving..." : "저장"}
+        {isLoading ? "保存中..." : "保存"}
       </button>
     </form>
   );

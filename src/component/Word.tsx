@@ -5,9 +5,10 @@ interface IProps {
 }
 
 export interface IWord {
-  day: string;
+  day: number;
   eng: string;
-  kor: string;
+  // kor → jpnに変更（日本語対応）
+  jpn: string;
   isDone: boolean;
   id: number;
 }
@@ -17,12 +18,15 @@ export default function Word({ word: w }: IProps) {
   const [isShow, setIsShow] = useState(false);
   const [isDone, setIsDone] = useState(word.isDone);
 
+  // 意味の表示・非表示を切り替える
   function toggleShow() {
     setIsShow(!isShow);
   }
 
+  // 学習済みフラグを切り替えてサーバーに保存する
   function toggleDone() {
-    fetch(`http://localhost:3001/words/${word.id}`, {
+    // nginxプロキシ経由でjson-serverにPUTリクエスト
+    fetch(`/api/words/${word.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -38,9 +42,11 @@ export default function Word({ word: w }: IProps) {
     });
   }
 
+  // 単語を削除する
   function del() {
-    if (window.confirm("삭제 하시겠습니까?")) {
-      fetch(`http://localhost:3001/words/${word.id}`, {
+    if (window.confirm("削除しますか？")) {
+      // nginxプロキシ経由でjson-serverにDELETEリクエスト
+      fetch(`/api/words/${word.id}`, {
         method: "DELETE",
       }).then(res => {
         if (res.ok) {
@@ -63,11 +69,11 @@ export default function Word({ word: w }: IProps) {
         <input type="checkbox" checked={isDone} onChange={toggleDone} />
       </td>
       <td>{word.eng}</td>
-      <td>{isShow && word.kor}</td>
+      <td>{isShow && word.jpn}</td>
       <td>
-        <button onClick={toggleShow}>뜻 {isShow ? "숨기기" : "보기"}</button>
+        <button onClick={toggleShow}>意味を{isShow ? "隠す" : "見る"}</button>
         <button onClick={del} className="btn_del">
-          삭제
+          削除
         </button>
       </td>
     </tr>

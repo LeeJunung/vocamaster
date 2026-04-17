@@ -4,7 +4,8 @@ import Word, { IWord } from "./Word";
 
 export default function Day() {
   const { day } = useParams<{ day: string }>();
-  const words: IWord[] = useFetch(`http://localhost:3001/words?day=${day}`);
+  // nginxプロキシ経由でjson-serverにアクセス
+  const words: IWord[] = useFetch(`/api/words?day=${day}`);
 
   return (
     <>

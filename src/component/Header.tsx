@@ -1,17 +1,18 @@
 import { Link } from "react-router-dom";
 
+// ヘッダーコンポーネント
 export default function Header() {
   return (
     <div className="header">
       <h1>
-        <Link to="/">토익 영단어(고급)</Link>
+        <Link to="/">TOEIC 英単語（上級）</Link>
       </h1>
       <div className="menu">
         <Link to="/create_word" className="link">
-          단어 추가
+          単語追加
         </Link>
         <Link to="/create_day" className="link">
-          Day 추가
+          Day追加
         </Link>
       </div>
     </div>
