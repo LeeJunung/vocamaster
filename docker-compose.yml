@@ -9,7 +9,7 @@ services:
       dockerfile: Dockerfile
     container_name: voca-app
     ports:
-      - "3000:80"         # ホスト80番ポートをnginxの80番に接続
+      - "3000:80"         # ホスト3000番ポートをnginxの80番に接続
     depends_on:
       - json-server     # json-serverが起動してからappを起動する
     restart: unless-stopped

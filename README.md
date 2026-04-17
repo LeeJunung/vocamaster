@@ -47,7 +47,7 @@ cd voca-master
 docker-compose up --build
 ```
 
-Open your browser at: http://localhost
+Open your browser at: http://localhost:3000
 
 > **Note:** The `src/db/data.json` file is mounted as a volume, so any data changes made in the app will be persisted on your local machine.
 
